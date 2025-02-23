@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FastX.AspNetCore;
 
-[DependsOn(typeof(XDataModule))]
+[DependsOn(typeof(XCoreModule))]
 public class XAspNetCoreModule : XModule
 {
     public override void ConfigurationService(IServiceCollection services)

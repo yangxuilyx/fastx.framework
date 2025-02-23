@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FastX;
 
-public class XDataModule : XModule
+public class XCoreModule : XModule
 {
     public override void ConfigurationService(IServiceCollection services)
     {
