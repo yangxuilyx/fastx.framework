@@ -3,10 +3,10 @@ using SqlSugar;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
-using FastX.Data.Redis;
 using Microsoft.AspNetCore.Shared;
 using StackExchange.Redis;
 using Newtonsoft.Json.Linq;
+using FastX.DistributedCache;
 
 namespace FastX.Data.SqlSugar;
 

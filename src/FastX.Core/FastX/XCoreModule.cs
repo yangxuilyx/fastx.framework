@@ -1,12 +1,12 @@
 using FastX.Data.DataFilters;
-using FastX.Data.Redis;
 using FastX.Data.Repository;
+using FastX.DistributedCache;
 using FastX.Modularity;
+using FastX.MultiTenancy;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FastX.Data;
+namespace FastX;
 
-[DependsOn(typeof(FastXModule))]
 public class XDataModule : XModule
 {
     public override void ConfigurationService(IServiceCollection services)
@@ -15,5 +15,8 @@ public class XDataModule : XModule
         services.AddSingleton(typeof(IDataFilter<>), typeof(DataFilter<>));
 
         services.AddSingleton<IConnectionMultiplexerFactory, ConnectionMultiplexerFactory>();
+
+        services.AddSingleton<ICurrentTenantAccessor>(AsyncLocalCurrentTenantAccessor.Instance);
+
     }
 }

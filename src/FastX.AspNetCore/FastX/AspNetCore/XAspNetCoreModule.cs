@@ -3,7 +3,6 @@ using FastX.AspNetCore.Conventions;
 using FastX.Authorization;
 using FastX.Authorization.Permissions;
 using FastX.Authorization.Permissions.Abstractions;
-using FastX.Data;
 using FastX.Modularity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

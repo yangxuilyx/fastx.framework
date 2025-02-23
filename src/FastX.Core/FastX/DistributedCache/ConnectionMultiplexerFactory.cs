@@ -1,8 +1,9 @@
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 
-namespace FastX.Data.Redis;
+namespace FastX.DistributedCache;
 
 public class ConnectionMultiplexerFactory : IConnectionMultiplexerFactory, IDisposable, IAsyncDisposable
 {
@@ -45,7 +46,7 @@ public class ConnectionMultiplexerFactory : IConnectionMultiplexerFactory, IDisp
 
     private void CheckDisposed()
     {
-        ObjectDisposedException.ThrowIf(this._disposed, this);
+        ObjectDisposedException.ThrowIf(_disposed, this);
     }
 
     public void Dispose()

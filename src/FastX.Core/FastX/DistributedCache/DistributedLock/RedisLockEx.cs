@@ -1,4 +1,4 @@
-namespace FastX.Data.Lock
+namespace FastX.DistributedCache.DistributedLock
 {
     /// <summary>
     /// redis锁扩展

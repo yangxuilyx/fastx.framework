@@ -1,9 +1,9 @@
 using System.Text;
-using FastX.Data.Redis;
+using FastX.DistributedCache;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 
-namespace FastX.Data.Lock
+namespace FastX.DistributedCache.DistributedLock
 {
     /// <summary>
     /// redis锁

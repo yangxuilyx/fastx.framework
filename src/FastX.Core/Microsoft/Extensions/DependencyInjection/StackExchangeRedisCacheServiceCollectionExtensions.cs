@@ -1,5 +1,5 @@
 using System.Configuration;
-using FastX.Data.Redis;
+using FastX.DistributedCache;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

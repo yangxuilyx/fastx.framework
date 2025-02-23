@@ -1,6 +1,6 @@
 ﻿using StackExchange.Redis;
 
-namespace FastX.Data.Redis;
+namespace FastX.DistributedCache;
 
 public interface IConnectionMultiplexerFactory
 {
