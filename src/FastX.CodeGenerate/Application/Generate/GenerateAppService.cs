@@ -3,6 +3,7 @@ using FastX.CodeGenerate.Application.Generate.Dtos;
 using FastX.CodeGenerate.Core.Generate;
 using FastX.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 
 namespace FastX.CodeGenerate.Application.Generate;
 
@@ -48,6 +49,14 @@ public class GenerateAppService : ReadOnlyAppService<GenerateModel, string, Gene
         }
 
         return await InsertOrUpdate(input);
+    }
+
+    protected override ISugarQueryable<GenerateModel> CreateFilteredQuery(GetGenerateModelListInput input)
+    {
+        return base.CreateFilteredQuery(input)
+                .WhereIF(!input.Name.IsNullOrEmpty(),p=>p.Name.Contains(input.Name))
+                .WhereIF(!input.DisplayName.IsNullOrEmpty(),p=>p.DisplayName != null && p.DisplayName.Contains(input.DisplayName))
+            ;
     }
 
     protected override async Task<GenerateModelDto> MapToEntityDto(GenerateModel entity)
