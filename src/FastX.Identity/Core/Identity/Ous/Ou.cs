@@ -36,11 +36,6 @@ public class Ou : Entity, ISoftDelete
     public Ulid ParentId { get; set; }
 
     /// <summary>
-    /// 组织级别
-    /// </summary>
-    public OuType OuType { get; set; }
-
-    /// <summary>
     /// IsDeleted
     /// </summary>
     public bool IsDeleted { get; set; }

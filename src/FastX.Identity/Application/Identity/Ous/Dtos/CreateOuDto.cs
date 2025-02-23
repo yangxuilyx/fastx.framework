@@ -31,9 +31,4 @@ public class CreateOuDto
     /// 上级Id
     /// </summary>
     public string ParentId { get; set; }
-
-    /// <summary>
-    /// 组织级别
-    /// </summary>
-    public OuType OuType { get; set; }
 }

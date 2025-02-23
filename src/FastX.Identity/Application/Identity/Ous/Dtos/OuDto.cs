@@ -38,16 +38,6 @@ public class OuDto
     public string ParentId { get; set; }
 
     /// <summary>
-    /// 组织级别
-    /// </summary>
-    public OuType OuType { get; set; }
-
-    /// <summary>
-    /// 组织级别
-    /// </summary>
-    public string OuTypeDesc => OuType.GetDescription();
-
-    /// <summary>
     /// 子列表
     /// </summary>
     public List<OuDto> Children { get; set; }
