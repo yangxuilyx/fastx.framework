@@ -31,9 +31,4 @@ public class IdentityModel
     /// 是否超管
     /// </summary>
     public bool IsSpecial { get; set; }
-
-    /// <summary>
-    /// 职务
-    /// </summary>
-    public PositionType PositionType { get; set; }
 }

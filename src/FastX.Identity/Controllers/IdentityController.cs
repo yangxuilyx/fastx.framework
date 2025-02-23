@@ -47,7 +47,6 @@ public class IdentityController : XController
             Name = user.Name,
             OuId = user.OuId?.ToString(),
             IsSpecial = user.IsSpecial ?? false,
-            PositionType = user.PositionType
         };
     }
 

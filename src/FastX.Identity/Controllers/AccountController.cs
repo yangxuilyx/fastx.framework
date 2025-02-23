@@ -62,7 +62,7 @@ public class AccountController : XController
         {
             var claims = new List<Claim>();
 
-            return await _signInManager.CreateToken(HttpContext.User, claims);
+            return await _signInManager.CreateJwtToken(HttpContext.User, claims);
         }
         throw new Exception("登录失败");
     }

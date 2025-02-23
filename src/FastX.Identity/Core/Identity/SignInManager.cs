@@ -128,10 +128,8 @@ public class SignInManager : ITransientDependency
     /// <param name="principal"></param>
     /// <param name="externalClaim"></param>
     /// <returns></returns>
-    public async Task<TokenResult> CreateToken(ClaimsPrincipal principal, List<Claim>? externalClaim)
+    public async Task<TokenResult> CreateJwtToken(ClaimsPrincipal principal, List<Claim>? externalClaim)
     {
-        // 1. 定义需要使用到的Claims
-
         // 2. 从 appsettings.json 中读取SecretKey
         var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
 

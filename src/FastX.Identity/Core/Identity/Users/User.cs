@@ -1,6 +1,4 @@
-using System.ComponentModel;
-using FastX.Data.DataFilters;
-using FastX.Data.Entities;
+using FastX.Data.Entities.AuditEntities;
 using FastX.Data.SqlSugar.DataAnnotations;
 
 namespace FastX.Identity.Core.Identity.Users;
@@ -9,7 +7,7 @@ namespace FastX.Identity.Core.Identity.Users;
 /// 用户
 /// </summary>
 [XSugarTable("Identity")]
-public class User : Entity, ISoftDelete
+public class User : AuditEntity
 {
     /// <summary>
     /// 用户Id
@@ -42,41 +40,12 @@ public class User : Entity, ISoftDelete
     public string? IdNo { get; set; }
 
     /// <summary>
-    /// 党员类型   0: 群众 1: 正式党员 2: 预备党员 3: 发展对象 4: 入党积极分子
-    /// </summary>
-    public UserType UserType { get; set; }
-
-    /// <summary>
     /// 组织Id
     /// </summary>
     public Ulid? OuId { get; set; }
 
     /// <summary>
-    /// 职务
-    /// </summary>
-    public string? Position { get; set; }
-
-    /// <summary>
-    /// 职务
-    /// </summary>
-    public PositionType PositionType { get; set; }
-
-    /// <summary>
     /// 是否超管
     /// </summary>
     public bool? IsSpecial { get; set; }
-
-    /// <summary>
-    /// IsDeleted
-    /// </summary>
-    public bool IsDeleted { get; set; }
-}
-
-public enum PositionType
-{
-    [Description("普通用户")]
-    _0,
-
-    [Description("部门领导")]
-    _1,
 }

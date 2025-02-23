@@ -30,34 +30,9 @@ public class UserDto
     public string IdNo { get; set; }
 
     /// <summary>
-    /// 党员类型  
-    /// </summary>
-    public UserType UserType { get; set; }
-
-    /// <summary>
-    /// 党员类型
-    /// </summary>
-    public string UserTypeDesc => UserType.GetDescription();
-
-    /// <summary>
     /// 组织Id
     /// </summary>
     public string? OuId { get; set; }
-
-    /// <summary>
-    /// 职务
-    /// </summary>
-    public string Position { get; set; }
-
-    /// <summary>
-    /// 职务
-    /// </summary>
-    public PositionType PositionType { get; set; }
-
-    /// <summary>
-    /// 职务
-    /// </summary>
-    public string PositionTypeDesc => PositionType.GetDescription();
 
     /// <summary>
     /// 角色
