@@ -1,0 +1,176 @@
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  inject
+} from '@angular/core';
+import {
+  AntTableComponent,
+  AntTableConfig
+} from '@app/shared/components/ant-table/ant-table.component';
+import { CardTableWrapComponent } from '@app/shared/components/card-table-wrap/card-table-wrap.component';
+import {
+  PageHeaderComponent,
+  PageHeaderType
+} from '@app/shared/components/page-header/page-header.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { finalize } from 'rxjs';
+import {
+  {{ name }}Client,
+  {{ name }}Dto,
+  Get{{ name }}ListInput,
+} from 'src/api/service-proxies';
+import { {{ name }}EditComponent } from './{{ camel_case_name }}-edit/{{ camel_case_name }}-edit.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-{{ camel_case_name }}',
+  templateUrl: './{{ camel_case_name }}.component.html',
+  styleUrls: ['./{{ camel_case_name }}.component.less'],
+  standalone: true,
+  imports: [
+    NzButtonModule,
+    PageHeaderComponent,
+    CardTableWrapComponent,
+    AntTableComponent,
+    {{ name }}EditComponent,
+    NzCardModule,
+    NzFormModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    NzFormModule,
+    NzSelectModule
+  ]
+})
+export class {{ name }}Component implements OnInit {
+  pageHeaderInfo: Partial<PageHeaderType> = {
+    breadcrumb: ['首页', '{{module_display_name}}', '{{ display_name }}']
+  };
+  @ViewChild('operationTpl', { static: true }) operationTpl!: TemplateRef<NzSafeAny>;
+
+  private cdr = inject(ChangeDetectorRef);
+
+  dataList: {{ name }}Dto[] = [];
+  tableConfig: AntTableConfig;
+
+  searchParam: Get{{ name }}ListInput = {};
+
+  constructor(
+    private modalService: NzModalService,
+    private client: {{ name }}Client,
+  ) { }
+
+  ngOnInit() {
+  this.initTable();
+  }
+
+  initTable(){
+    this.tableConfig  = {
+        headers: 
+        [
+          {{~ for $i in fields ~}}
+          {{ if($i.is_dto) }}
+           {
+            title: '{{$i.display_name}}',
+            field: '{{$i.camel_case_name}}',
+            width: 200
+           },
+          {{ end }}
+         {{~ end ~}}
+          {
+            title: '操作',
+            tdTemplate: this.operationTpl,
+            width: 120,
+            fixed: true,
+            fixedDir: 'right'
+          }
+        ],
+        total: 0,
+        showCheckbox: false,
+        loading: false,
+        pageSize: 10,
+        pageIndex: 1
+      };
+  }
+
+  /*重置*/
+  resetForm(): void {
+    this.searchParam = {};
+    this.getDataList();
+  }
+
+  getDataList(e?: NzTableQueryParams): void {
+    this.tableConfig.loading = true;
+
+    this.searchParam.page = {
+      pageSize: this.tableConfig.pageSize!,
+      pageIndex: e?.pageIndex || this.tableConfig.pageIndex!
+    };
+
+    this.client
+      .list(this.searchParam)
+      .pipe(
+        finalize(() => {
+          this.tableLoading(false);
+        })
+      )
+      .subscribe(data => {
+        const { items, page } = data;
+        this.dataList = [...items];
+        this.tableConfig.total = page.totalCount!;
+        this.tableConfig.pageIndex = page.pageIndex!;
+        this.tableLoading(false);
+      });
+  }
+
+  selectedEntity: {{ name }}Dto;
+  isEditVisible = false;
+  add(): void {
+    this.selectedEntity = null;
+    this.isEditVisible = true;
+  }
+
+  // 修改
+  edit(item: {{ name }}Dto): void {
+    this.selectedEntity = item;
+    this.isEditVisible = true;
+  }
+
+  del(item: {{ name }}Dto): void {
+    this.modalService.confirm({
+      nzTitle: '确定删除?',
+      nzOnOk: () => {
+        this.client.delete(item.{{ camel_case_name }}Id).subscribe(t => {
+          this.getDataList();
+        });
+      }
+    });
+  }
+
+  tableLoading(isLoading: boolean): void {
+    this.tableConfig.loading = isLoading;
+    this.tableChangeDectction();
+  }
+
+  // 触发表格变更检测
+  tableChangeDectction(): void {
+    // 改变引用触发变更检测。
+    this.dataList = [...this.dataList];
+    this.cdr.detectChanges();
+  }
+
+  // 修改一页几条
+  changePageSize(e: number): void {
+    this.tableConfig.pageSize = e;
+  }
+}

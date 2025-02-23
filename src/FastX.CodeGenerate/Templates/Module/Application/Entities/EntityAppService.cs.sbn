@@ -1,0 +1,36 @@
+using {{namespace}}.Application.{{module_name}}.{{name}}s.Dtos;
+using FastX.Application.Services;
+using FastX.Data.Repository;
+using SqlSugar;
+using {{namespace}}.Core.{{module_name}}.{{name}}s;
+
+namespace {{namespace}}.Application.{{module_name}}.{{ name }}s;
+
+/// <summary>
+/// {{display_name}}
+/// </summary>
+public class {{ name }}AppService : CrudAppService<{{ name }}, string, {{ name }}Dto, Get{{ name }}ListInput, Create{{ name }}Dto,Update{{ name }}Dto>, I{{ name }}AppService
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public {{ name }}AppService(IRepository<{{ name }}> repository) : base(repository)
+    {
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    protected override ISugarQueryable<{{ name }}> CreateFilteredQuery(Get{{ name }}ListInput input)
+    {
+        return base.CreateFilteredQuery(input)
+        {{~ for $i in fields ~}}
+        {{~ if($i.is_query) ~}}
+        .WhereIF(!input.{{$i.name}}.IsNullOrEmpty(), p => p.{{$i.name}} == input.{{$i.name}})
+        {{~ end ~}}
+        {{~ end ~}} 
+        ;
+    }
+}

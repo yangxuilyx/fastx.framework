@@ -1,0 +1,99 @@
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import {
+  FormGroup,
+  FormsModule,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+import { FormGroupInfo, FormGroupValidator } from '@app/utils/forms/form-group';
+import { fnCheckForm } from '@app/utils/tools';
+import { BasicConfirmModalComponent } from '@app/widget/base-modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NZ_MODAL_DATA, NzModalModule, NzModalRef } from 'ng-zorro-antd/modal';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { of } from 'rxjs';
+import {
+  Create{{ name }}Dto,
+  {{ name }}Client,
+  {{ name }}Dto,
+} from 'src/api/service-proxies';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+
+@Component({
+  selector: 'app-{{ camel_case_name }}-edit',
+  templateUrl: './{{ camel_case_name }}-edit.component.html',
+  styleUrls: ['./{{ camel_case_name }}-edit.component.less'],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    NzFormModule,
+    NzModalModule,
+    NzSelectModule,
+    NzInputModule,
+    NzDatePickerModule,
+    NzInputNumberModule,
+    NzRadioModule
+  ],
+  standalone: true
+})
+export class {{ name }}EditComponent implements OnInit {
+
+  @Input()
+  entity: {{ name }}Dto;
+
+  _isVisible = false;
+  @Input()
+  get isVisible() {
+    return this._isVisible;
+  }
+  set isVisible(val: boolean) {
+    this._isVisible = val;
+
+    if (val) {
+      if(this.entity)
+      this.validateForm.patchValue(this.entity);
+    }
+  }
+
+  @Output()
+  isVisibleChange = new EventEmitter<boolean>();
+
+  @Output()
+  onSuccess = new EventEmitter();
+
+  validateForm: FormGroup<FormGroupInfo<Create{{ name }}Dto>> = this.fb.group<
+    FormGroupValidator<Create{{ name }}Dto>
+  >({
+  {{~ for $i in fields ~}}
+  {{ if($i.is_create) }}
+  {{ $i.camel_case_name }}: [{{~ if($i.can_be_null) ~}} null,[Validators.required] {{~ end ~}}],
+  {{ end }}
+  {{~ end ~}}
+  });
+
+  constructor(
+    private client: {{ name }}Client,
+    private fb: NonNullableFormBuilder
+  ) { }
+
+  ngOnInit() {
+  }
+
+  handleCancel() {
+    this.validateForm.reset();
+    this.isVisibleChange.emit(false);
+  }
+
+  handleOk() {
+    if (!fnCheckForm(this.validateForm)) return;
+
+    this.client.insertOrUpdate(this.validateForm.value).subscribe(() => {
+      this.onSuccess.emit();
+      this.handleCancel();
+    });
+  }
+}

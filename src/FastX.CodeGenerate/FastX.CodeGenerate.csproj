@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Templates\Module\Application\Entities\Dtos\FeeDto.cs" />
+    <Compile Remove="Templates\Module\Application\Entities\Dtos\GetFeeListInput.cs" />
+    <Compile Remove="Templates\Module\Application\Entities\IFeeAppService.cs" />
+  </ItemGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FastX.AspNetCore\FastX.AspNetCore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Scriban" Version="5.10.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Templates\angular\entity\entity-edit\entity-edit.component.html.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\angular\entity\entity-edit\entity-edit.component.less.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\angular\entity\entity-edit\entity-edit.component.ts.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\angular\entity\entity.component.html.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\angular\entity\entity.component.less.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\angular\entity\entity.component.ts.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Module\Application\Entities\Dtos\CreateEntityDto.cs.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Module\Application\Entities\Dtos\EntityDto.cs.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Module\Application\Entities\Dtos\GetEntityListInput.cs.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Module\Application\Entities\Dtos\UpdateEntityDto.cs.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Module\Application\Entities\EntityAppService.cs.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Module\Application\Entities\EntityProfile.cs.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Module\Application\Entities\FeeAppService.cs.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Module\Application\Entities\IEntityAppService.cs.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\Module\Entities\Entity.cs.sbn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

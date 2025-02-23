@@ -1,0 +1,15 @@
+using AutoMapper;
+using {{namespace}}.Application.{{module_name}}.{{name}}s.Dtos;
+using {{namespace}}.Core.{{module_name}}.{{name}}s;
+
+namespace {{namespace}}.Application.{{module_name}}.{{name}}s;
+
+public class {{name}}Profile : Profile
+{
+    public {{name}}Profile()
+    {
+        CreateMap<{{name}}, {{name}}Dto>().ReverseMap();
+        CreateMap<{{name}}, Create{{name}}Dto>().ReverseMap();
+        CreateMap<{{name}}, Update{{name}}Dto>().ReverseMap();
+    }
+}

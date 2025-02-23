@@ -1,0 +1,24 @@
+using System.ComponentModel;
+using FastX.Data.Audit;
+using FastX.Data.SqlSugar.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+
+namespace {{namespace}}.Core.{{module_name}}.{{name}}s;
+
+/// <summary>
+/// {{display_name}}
+/// </summary>
+[XSugarTable(_NOTIMPLEMENT)]
+public class {{name}} : AuditEntity
+{
+{{~ for $i in fields ~}}
+    /// <summary>
+    /// {{$i.display_name}}
+    /// </summary>
+    {{~ if($i.is_primary_key) ~}} 
+    [Key]
+    {{~ end ~}} 
+    public {{$i.type}}{{ if($i.can_be_null) }}?{{ end }} {{$i.name}} { get; set; }
+
+{{~ end ~}} 
+}

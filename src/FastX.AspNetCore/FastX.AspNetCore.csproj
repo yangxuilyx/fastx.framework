@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <OutputType>Library</OutputType>
+        <RootNamespace />
+    </PropertyGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="FastX\Security\Claims\" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\FastX.Core\FastX.Core.csproj" />
+    </ItemGroup>
+
+</Project>

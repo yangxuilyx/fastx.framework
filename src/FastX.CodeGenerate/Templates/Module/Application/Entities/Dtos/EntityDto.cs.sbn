@@ -1,0 +1,17 @@
+namespace {{namespace}}.Application.{{module_name}}.{{name}}s.Dtos;
+
+/// <summary>
+/// {{display_name}}
+/// </summary>
+public class {{name}}Dto
+{
+{{~ for $i in fields ~}}
+    {{~ if($i.is_dto) ~}}
+    /// <summary>
+    /// {{$i.display_name}}
+    /// </summary>
+    public {{$i.type == "Ulid"?"string":$i.type}}{{ if($i.can_be_null) }}?{{ end }} {{$i.name}} { get; set; }
+    
+    {{~ end ~}}
+{{~ end ~}} 
+}

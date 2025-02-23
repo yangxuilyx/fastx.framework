@@ -1,0 +1,59 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<div class="normal-table-wrap">
+  <nz-card class="m-b-10" [nzBodyStyle]="{ 'padding-bottom': 0 }">
+    <form nz-form (ngSubmit)="getDataList()">
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+      {{~ for $i in fields ~}}
+      {{ if($i.is_query) }}
+      <div nz-col [nzSpan]="6">
+          <nz-form-item>
+            <nz-form-label [nzFor]="">{{$i.display_name}}</nz-form-label>
+            <nz-form-control>
+              <input nz-input [(ngModel)]="searchParam.{{$i.camel_case_name}}" [ngModelOptions]="{ standalone: true }" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      {{ end }}
+     {{~ end ~}}
+
+        <div class="m-b-8 text-right p-0" nz-col [nzSpan]="6">
+          <button nz-button [nzType]="'primary'">
+            <i nz-icon nzType="search"></i>
+            搜索
+          </button>
+          <button class="m-l-15" nz-button type="button" (click)="resetForm()">
+            <i nz-icon nzTheme="outline" nzType="close-circle"></i>
+            重置
+          </button>
+        </div>
+      </div>
+    </form>
+  </nz-card>
+
+  <app-card-table-wrap [btnTpl]="tableBtns" [tableTitle]="'{{display_name}}列表'" (reload)="getDataList()">
+    <app-ant-table
+      [tableConfig]="tableConfig"
+      [tableData]="dataList"
+      (changePageNum)="getDataList($event)"
+      (changePageSize)="changePageSize($event)"
+    ></app-ant-table>
+    <ng-template #operationTpl let-id="id" let-item="item" let-longText="longText">
+      <span class="operate-text" (click)="edit(item)">编辑</span>
+      <span class="operate-text" (click)="del(item)">删除</span>
+    </ng-template>
+  </app-card-table-wrap>
+</div>
+
+<ng-template #tableBtns>
+  <button class="m-r-8" nz-button nzType="primary" (click)="add()">
+    <i nz-icon nzType="plus"></i>
+    新建
+  </button>
+</ng-template>
+
+<app-{{camel_case_name}}-edit
+  [entity]="selectedEntity"
+  [(isVisible)]="isEditVisible"
+  (onSuccess)="getDataList()"
+></app-{{camel_case_name}}-edit>

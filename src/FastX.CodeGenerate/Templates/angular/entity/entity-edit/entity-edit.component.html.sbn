@@ -1,0 +1,24 @@
+<nz-modal
+  nzTitle="{{display_name}}编辑"
+  nzxModalDrag
+  [(nzVisible)]="isVisible"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  nzWidth="60%"
+  [nzBodyStyle]="{ padding: '15px', height: '70vh' }"
+>
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm">
+    {{~ for $i in fields ~}}
+    {{ if($i.is_create) }}
+    <nz-form-item>
+    <nz-form-label nzSpan="2" {{~ if($i.can_be_null) ~}} nzRequired {{~ end ~}}>{{$i.display_name}}</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="{{$i.camel_case_name}}" />
+    </nz-form-control>
+  </nz-form-item>
+    {{ end }}
+    {{~ end ~}}
+    </form>
+  </ng-container>
+</nz-modal>

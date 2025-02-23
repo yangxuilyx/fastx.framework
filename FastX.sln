@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F48BD1E-9BE5-48A1-9824-9FA7B2291A07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{47057D9F-BFA9-4EE5-93E1-B5728183DED8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastX", "src\FastX\FastX.csproj", "{7D45EC6A-291C-4599-8E07-9668D1F64772}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastX.AspNetCore", "src\FastX.AspNetCore\FastX.AspNetCore.csproj", "{6A27744F-44B9-4B3B-9DE9-B1CA480C05A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastX.Autofac", "src\FastX.Autofac\FastX.Autofac.csproj", "{CD2EE399-A738-4018-A121-12DC9532BE7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastX.CodeGenerate", "src\FastX.CodeGenerate\FastX.CodeGenerate.csproj", "{79C5C7D7-7623-496A-89E8-E974F600D8FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastX.Core", "src\FastX.Core\FastX.Core.csproj", "{2283A14D-5281-4D41-96AC-24B50ECDFD1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D45EC6A-291C-4599-8E07-9668D1F64772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D45EC6A-291C-4599-8E07-9668D1F64772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D45EC6A-291C-4599-8E07-9668D1F64772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D45EC6A-291C-4599-8E07-9668D1F64772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A27744F-44B9-4B3B-9DE9-B1CA480C05A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A27744F-44B9-4B3B-9DE9-B1CA480C05A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A27744F-44B9-4B3B-9DE9-B1CA480C05A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A27744F-44B9-4B3B-9DE9-B1CA480C05A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD2EE399-A738-4018-A121-12DC9532BE7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD2EE399-A738-4018-A121-12DC9532BE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD2EE399-A738-4018-A121-12DC9532BE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD2EE399-A738-4018-A121-12DC9532BE7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C5C7D7-7623-496A-89E8-E974F600D8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C5C7D7-7623-496A-89E8-E974F600D8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C5C7D7-7623-496A-89E8-E974F600D8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C5C7D7-7623-496A-89E8-E974F600D8FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2283A14D-5281-4D41-96AC-24B50ECDFD1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2283A14D-5281-4D41-96AC-24B50ECDFD1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2283A14D-5281-4D41-96AC-24B50ECDFD1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2283A14D-5281-4D41-96AC-24B50ECDFD1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D45EC6A-291C-4599-8E07-9668D1F64772} = {3F48BD1E-9BE5-48A1-9824-9FA7B2291A07}
+		{6A27744F-44B9-4B3B-9DE9-B1CA480C05A8} = {3F48BD1E-9BE5-48A1-9824-9FA7B2291A07}
+		{CD2EE399-A738-4018-A121-12DC9532BE7A} = {3F48BD1E-9BE5-48A1-9824-9FA7B2291A07}
+		{79C5C7D7-7623-496A-89E8-E974F600D8FD} = {3F48BD1E-9BE5-48A1-9824-9FA7B2291A07}
+		{2283A14D-5281-4D41-96AC-24B50ECDFD1D} = {3F48BD1E-9BE5-48A1-9824-9FA7B2291A07}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FBB648D-45A2-4EED-8BD5-F2D510288933}
+	EndGlobalSection
+EndGlobal

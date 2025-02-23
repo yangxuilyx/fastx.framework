@@ -1,0 +1,29 @@
+using FastX.Application.Dtos;
+using FastX.Data.PagedResult;
+
+namespace {{namespace}}.Application.{{module_name}}.{{name}}s.Dtos;
+
+/// <summary>
+/// {{display_name}}
+/// </summary>
+public class Get{{name}}ListInput : IPagedResultRequest, ISortedResultRequest
+{
+{{~ for $i in fields ~}}
+    {{~ if($i.is_query) ~}}
+    /// <summary>
+    /// {{$i.display_name}}
+    /// </summary>
+    public {{$i.type == "Ulid"?"string":$i.type}}? {{$i.name}} { get; set; }
+    {{~ end ~}}
+{{~ end ~}} 
+
+    /// <summary>
+    /// 分页信息
+    /// </summary>
+    public PageInfo Page { get; set; }
+
+    /// <summary>
+    /// 排序
+    /// </summary>
+    public string? Sorting { get; set; } = "{{name}}Id DESC";
+}
