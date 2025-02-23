@@ -8,6 +8,11 @@ namespace FastX.CodeGenerate.Application.Generate.Dtos;
 public class GenerateModelDto
 {
     /// <summary>
+    /// 表Id
+    /// </summary>
+    public string GenerateModelId { get; set; }
+
+    /// <summary>
     /// 实体名称
     /// </summary>
     [Required]

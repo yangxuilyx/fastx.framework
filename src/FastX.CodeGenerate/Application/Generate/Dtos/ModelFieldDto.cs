@@ -3,6 +3,11 @@ namespace FastX.CodeGenerate.Application.Generate.Dtos;
 public class ModelFieldDto
 {
     /// <summary>
+    /// 字段Id
+    /// </summary>
+    public string ModelFieldId { get; set; }
+
+    /// <summary>
     /// 字段名称
     /// </summary>
     public string? Name { get; set; }

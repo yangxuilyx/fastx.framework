@@ -1,6 +1,9 @@
-namespace FastX.CodeGenerate.Models.CodeGenerate;
+using FastX.CodeGenerate.Application.Generate.Dtos;
+using FastX.CodeGenerate.Core.Generate;
 
-public class TemplateViewModel
+namespace FastX.CodeGenerate.Application.Generate;
+
+public class Template
 {
     public string TemplatePath { get; set; } = string.Empty;
 
@@ -8,11 +11,11 @@ public class TemplateViewModel
 
     public string SavePath { get; set; } = string.Empty;
 
-    public static List<TemplateViewModel> GetNormalViewModels(GenerateInput module)
+    public static List<Template> GetNormalViewModels(GenerateModelDto module)
     {
         var basePath = AppContext.BaseDirectory;
 
-        var result = new List<TemplateViewModel>()
+        var result = new List<Template>()
             {
                 new()
                 {
@@ -60,7 +63,7 @@ public class TemplateViewModel
                 {
                     TemplatePath = Path.Combine(basePath,@"Templates\Module\Application\Entities", "EntityAppService.cs.sbn"),
                     SavePath = Path.Combine(basePath,$@"_GenerateCode\Module\Application\{module.Name}s\",$"{module.Name}AppService.cs"),
-                },   
+                },
                 new()
                 {
                     TemplatePath = Path.Combine(basePath,@"Templates\Module\Application\Entities", "EntityProfile.cs.sbn"),
@@ -80,7 +83,7 @@ public class TemplateViewModel
                 {
                     TemplatePath = Path.Combine(basePath,@"Templates\Module\Application\Entities\Dtos", "EntityDto.cs.sbn"),
                     SavePath = Path.Combine(basePath,$@"_GenerateCode\Module\Application\{module.Name}s\Dtos",$"{module.Name}Dto.cs"),
-                },     
+                },
                 new()
                 {
                     TemplatePath = Path.Combine(basePath,@"Templates\Module\Application\Entities\Dtos", "GetEntityListInput.cs.sbn"),

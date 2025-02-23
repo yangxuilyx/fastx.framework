@@ -1,4 +1,4 @@
-using FastX.Data.Entities;
+﻿using FastX.Data.Entities;
 using FastX.Data.SqlSugar.DataAnnotations;
 
 namespace FastX.CodeGenerate.Core.Generate;
@@ -17,7 +17,7 @@ public class ModelField : Entity
     /// <summary>
     /// 表Id
     /// </summary>
-    public Ulid TableId { get; set; }
+    public Ulid GenerateModelId { get; set; }
 
     /// <summary>
     /// 字段名称

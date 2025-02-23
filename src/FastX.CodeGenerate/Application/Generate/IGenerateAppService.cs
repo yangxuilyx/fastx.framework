@@ -1,3 +1,6 @@
+using FastX.CodeGenerate.Application.Generate.Dtos;
+using Microsoft.AspNetCore.Mvc;
+
 namespace FastX.CodeGenerate.Application.Generate;
 
 /// <summary>
@@ -5,5 +8,11 @@ namespace FastX.CodeGenerate.Application.Generate;
 /// </summary>
 public interface IGenerateAppService
 {
-    
+    /// <summary>
+    /// 生成代码
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost]
+    Task<GenerateModelDto> Generate(GenerateModelDto input);
 }

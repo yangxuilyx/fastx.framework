@@ -13,7 +13,7 @@ public class GenerateModel : Entity
     /// <summary>
     /// 表Id
     /// </summary>
-    public Ulid TableId { get; set; }
+    public Ulid GenerateModelId { get; set; }
 
     /// <summary>
     /// 实体名称
