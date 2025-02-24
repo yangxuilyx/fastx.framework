@@ -1,7 +1,7 @@
 #!/bin/bash
 
 API_KEY="$NUGET_API_KEY"
-NUGET_SOURCE="nuget.org"
+NUGET_SOURCE="https://api.nuget.org/v3/index.json"
 OUTPUT_DIR="./nupkgs" 
 
 dotnet pack \
