@@ -8,9 +8,10 @@ VERSION="$NUGET_VERSION"
 dotnet pack \
     -c Release \
     -o $OUTPUT_DIR \
-    -p:Version=$VERSION
+    -p:Version=$VERSION \
     --include-symbols \
     -p:SymbolPackageFormat=snupkg
+    
 
 find $OUTPUT_DIR -name "*.nupkg" | while read package; do
   dotnet nuget push "$package" \
