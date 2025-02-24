@@ -3,7 +3,7 @@
 API_KEY="$NUGET_API_KEY"
 NUGET_SOURCE="https://api.nuget.org/v3/index.json"
 OUTPUT_DIR="./nupkgs" 
-VERSION="$FASTX_VERSION"
+VERSION="$NUGET_VERSION"
 
 dotnet pack \
     -c Release \
