@@ -27,5 +27,5 @@ public class XClaimTypes
     /// <summary>
     /// tenantId
     /// </summary>
-    public static string TenantId { get; set; } = "fastxtenantid";
+    public static string TenantId { get; set; } = "xtenantid";
 }
