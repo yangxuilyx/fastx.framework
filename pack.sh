@@ -3,13 +3,14 @@
 API_KEY="$NUGET_API_KEY"
 NUGET_SOURCE="https://api.nuget.org/v3/index.json"
 OUTPUT_DIR="./nupkgs" 
+VERSION="$FASTX_VERSION"
 
 dotnet pack \
     -c Release \
     -o $OUTPUT_DIR \
+    -p:Version=$VERSION
     --include-symbols \
-    -p:SymbolPackageFormat=snupkg  # 包含调试符号[8]
-
+    -p:SymbolPackageFormat=snupkg
 
 find $OUTPUT_DIR -name "*.nupkg" | while read package; do
   dotnet nuget push "$package" \
