@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+    <PropertyGroup>
+        <DotnetVersion>net8.0</DotnetVersion>
+        <LangVersion>latest</LangVersion>
+        <Configurations>Debug;Release;</Configurations>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageOutputPath>$(MSBuildProjectDirectory)\..\..\nupkgs</PackageOutputPath>
+        <Version>1.0.2</Version>
+        <Authors>FastX</Authors>
+        <Product>FastX</Product>
+        <AssemblyTitle>FastX</AssemblyTitle>
+        <Description>FastX is a .NET Web Platform Build With SqlSugar</Description>
+        <Copyright>FastX 2024. Copyright</Copyright>
+        <PackageDescription>$(Description)</PackageDescription>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>fastx,aspnetcore,sqlsugar</PackageTags>
+        <!-- <PackageIcon></PackageIcon> -->
+        <IncludeSource>false</IncludeSource>
+        <RepositoryUrl></RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <NoWarn>$(NoWarn);1701;1702;1591;CS8618</NoWarn>
+        <AddSyntheticProjectReferencesForSolutionDependencies>false</AddSyntheticProjectReferencesForSolutionDependencies>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="$(MSBuildProjectDirectory)\..\..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+</Project>

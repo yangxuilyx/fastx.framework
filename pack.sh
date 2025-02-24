@@ -1,0 +1,19 @@
+#!/bin/bash
+
+API_KEY="$NUGET_API_KEY"
+NUGET_SOURCE="nuget.org"
+OUTPUT_DIR="./nupkgs" 
+
+dotnet pack \
+    -c Release \
+    -o $OUTPUT_DIR \
+    --include-symbols \
+    -p:SymbolPackageFormat=snupkg  # 包含调试符号[8]
+
+
+find $OUTPUT_DIR -name "*.nupkg" | while read package; do
+  dotnet nuget push "$package" \
+    -k $API_KEY \
+    -s $NUGET_SOURCE \
+    --skip-duplicate              # 避免重复包错误[1,6]
+done
