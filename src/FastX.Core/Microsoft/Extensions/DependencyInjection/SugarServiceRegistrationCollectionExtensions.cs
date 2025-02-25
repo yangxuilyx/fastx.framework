@@ -67,13 +67,13 @@ public static class SugarServiceRegistrationCollectionExtensions
 
         }, db =>
         {
-            db.Aop.OnLogExecuting = (sql, parameters) =>
-            {
-                Console.WriteLine("------sql begin ------");
-                Console.WriteLine(sql);
-                Console.WriteLine("------sql end ------");
+            //db.Aop.OnLogExecuting = (sql, parameters) =>
+            //{
+            //    Console.WriteLine("------sql begin ------");
+            //    Console.WriteLine(sql);
+            //    Console.WriteLine("------sql end ------");
 
-            };
+            //};
         });
 
         services.AddTransient<ISqlSugarClient>(t => sqlSugarClient);

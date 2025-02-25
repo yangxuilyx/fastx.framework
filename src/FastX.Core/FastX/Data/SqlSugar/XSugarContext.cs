@@ -1,10 +1,10 @@
 using FastX.Data.DataFilters;
-using FastX.Data.Entities;
 using SqlSugar;
 using System.Linq.Expressions;
 using FastX.DependencyInjection;
 using FastX.MultiTenancy;
 using Microsoft.Extensions.DependencyInjection;
+using FastX.Data.Entities;
 
 namespace FastX.Data.SqlSugar;
 

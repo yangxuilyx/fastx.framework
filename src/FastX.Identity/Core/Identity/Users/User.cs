@@ -1,4 +1,4 @@
-using FastX.Data.Entities.AuditEntities;
+using FastX.Data.Entities;
 using FastX.Data.SqlSugar.DataAnnotations;
 
 namespace FastX.Identity.Core.Identity.Users;

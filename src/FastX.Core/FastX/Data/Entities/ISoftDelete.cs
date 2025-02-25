@@ -1,4 +1,4 @@
-﻿namespace FastX.Data.DataFilters;
+namespace FastX.Data.Entities;
 
 public interface ISoftDelete
 {

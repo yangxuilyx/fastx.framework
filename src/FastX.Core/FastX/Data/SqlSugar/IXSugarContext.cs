@@ -1,4 +1,4 @@
-﻿using FastX.Data.Entities;
+using FastX.Data.Entities;
 using SqlSugar;
 using System.Linq.Expressions;
 

@@ -1,8 +1,6 @@
-using FastX.Data.DataFilters;
+namespace FastX.Data.Entities;
 
-namespace FastX.Data.Entities.AuditEntities;
-
-public class AuditEntity : Entity, ISoftDelete, IHasCreateTime,IHasUpdateTime
+public class AuditEntity : Entity, ISoftDelete, IHasCreateTime, IHasUpdateTime
 {
     /// <summary>
     /// IsDeleted
