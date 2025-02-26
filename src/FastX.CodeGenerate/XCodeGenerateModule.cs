@@ -22,6 +22,6 @@ public class XCodeGenerateModule : XModule
     /// <param name="services"></param>
     public override void PostConfigureServices(IServiceCollection services)
     {
-        services.GetSingletonInstance<XSugarBuilder>().CodeFirstInitTables(typeof(XCodeGenerateModule).Assembly);
+        services.GetSingletonInstance<XSugarBuilder>().InitTables(typeof(XCodeGenerateModule).Assembly);
     }
 }

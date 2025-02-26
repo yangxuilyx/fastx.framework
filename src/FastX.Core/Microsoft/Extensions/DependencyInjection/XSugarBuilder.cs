@@ -18,10 +18,10 @@ public class XSugarBuilder(ISqlSugarClient sqlSugarClient, IServiceCollection se
     public IServiceCollection Services { get; set; } = services;
 
     /// <summary>
-    /// CodeFirstInitTables
+    /// InitTables
     /// </summary>
     /// <param name="assembly"></param>
-    public void CodeFirstInitTables([NotNull] Assembly assembly)
+    public void InitTables([NotNull] Assembly assembly)
     {
         var entityTypes = assembly.GetTypes().Where(t => typeof(IEntity).IsAssignableFrom(t)).ToArray();
         SqlSugarClient.CodeFirst.InitTables(entityTypes);
