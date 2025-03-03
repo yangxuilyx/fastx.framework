@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OpenIddict.Core" Version="6.1.0" />
+    <PackageReference Include="OpenIddict.Server.AspNetCore" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FastX.AspNetCore\FastX.AspNetCore.csproj" />
   </ItemGroup>
 
