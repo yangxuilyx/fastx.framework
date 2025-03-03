@@ -11,7 +11,7 @@ namespace FastX.Identity.Controllers;
 /// <summary>
 /// 身份管理
 /// </summary>
-[Authorize()]
+[Authorize]
 public class IdentityController : XController
 {
     private readonly UserManager _userManager;

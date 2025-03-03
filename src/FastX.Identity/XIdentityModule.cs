@@ -49,8 +49,8 @@ public class XIdentityModule : XModule
     {
         services.GetSingletonInstance<XSugarBuilder>().InitTables(typeof(XIdentityModule).Assembly);
 
-        var manager = services.BuildServiceProvider().CreateScope().ServiceProvider
-            .GetRequiredService<IOpenIddictApplicationManager>();
+        //var manager = services.BuildServiceProvider().CreateScope().ServiceProvider
+        //    .GetRequiredService<IOpenIddictApplicationManager>();
 
         //manager.CreateAsync(new OpenIddictApplicationDescriptor()
         //{
