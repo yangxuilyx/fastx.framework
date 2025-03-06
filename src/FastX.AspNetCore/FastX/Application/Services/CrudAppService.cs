@@ -5,7 +5,7 @@ namespace FastX.Application.Services;
 
 public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput> : CrudAppService<TEntity, TKey, TEntityDto, TGetListInput,
     TEntityDto, TEntityDto>
-    where TEntity : class, IEntity
+    where TEntity : class, IEntity where TEntityDto : class
 {
     /// <summary>
     /// 
@@ -18,7 +18,7 @@ public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput> :
 
 public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, TCreateInput> : CrudAppService<TEntity, TKey, TEntityDto, TGetListInput,
     TCreateInput, TCreateInput>
-    where TEntity : class, IEntity
+    where TEntity : class, IEntity where TEntityDto : class where TCreateInput : class
 {
     /// <summary>
     /// 
@@ -30,7 +30,7 @@ public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, T
 }
 
 public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, TCreateInput, TUpdateInput> : ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInput>
-    where TEntity : class, IEntity
+    where TEntity : class, IEntity where TEntityDto : class where TCreateInput : class where TUpdateInput : class
 {
     /// <summary>
     /// CrudAppService
@@ -74,11 +74,11 @@ public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, T
 
     protected virtual Task<TEntity> MapUpdateDtoToEntity(TUpdateInput entityDto)
     {
-        return Task.FromResult(ObjectMapper.Map<TEntity>(entityDto));
+        return MapTo<TUpdateInput, TEntity>(entityDto);
     }
 
     protected virtual Task<TEntity> MapCreateDtoToEntity(TCreateInput entityDto)
     {
-        return Task.FromResult(ObjectMapper.Map<TEntity>(entityDto));
+        return MapTo<TCreateInput, TEntity>(entityDto);
     }
 }

@@ -9,7 +9,7 @@ using SqlSugar;
 namespace FastX.Application.Services;
 
 public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInput> : ApplicationService
-    where TEntity : class, IEntity
+    where TEntity : class, IEntity where TEntityDto : class
 {
     protected IRepository<TEntity> Repository { get; }
 
@@ -89,14 +89,25 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
 
     protected virtual Task<TEntityDto> MapToEntityDto(TEntity entity)
     {
-        Check.NotNull(entity, nameof(entity));
+        return MapTo<TEntity, TEntityDto>(entity);
+    }
 
-        return Task.FromResult(ObjectMapper.Map<TEntityDto>(entity));
+    protected virtual Task<TOutput> MapTo<TOutput>(object? input) where TOutput : class
+    {
+        return MapTo<TOutput>(input);
+    }
+
+    protected virtual Task<TOutput> MapTo<TInput, TOutput>(TInput? input) where TInput : class where TOutput : class
+    {
+        if (input == null)
+            return Task.FromResult<TOutput>(default!);
+
+        return Task.FromResult(ObjectMapper.Map<TOutput>(input));
     }
 
     protected virtual async Task<List<TEntityDto>> MapToEntityDtoList(List<TEntity> entities)
     {
-        List<TEntityDto> entityDtos = new List<TEntityDto>();
+        var entityDtos = new List<TEntityDto>();
         foreach (var entity in entities)
         {
             entityDtos.Add(await MapToEntityDto(entity));
