@@ -94,7 +94,7 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
 
     protected virtual Task<TOutput> MapTo<TOutput>(object? input) where TOutput : class
     {
-        return MapTo<TOutput>(input);
+        return MapTo<object,TOutput>(input);
     }
 
     protected virtual Task<TOutput> MapTo<TInput, TOutput>(TInput? input) where TInput : class where TOutput : class
@@ -102,7 +102,7 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
         if (input == null)
             return Task.FromResult<TOutput>(default!);
 
-        return Task.FromResult(ObjectMapper.Map<TOutput>(input));
+        return Task.FromResult(ObjectMapper.Map<TInput,TOutput>(input));
     }
 
     protected virtual async Task<List<TEntityDto>> MapToEntityDtoList(List<TEntity> entities)
