@@ -97,9 +97,18 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
         return MapTo<TEntity, TEntityDto>(entity);
     }
 
+    protected virtual async Task<List<TEntityDto>> MapToEntityDtoList(List<TEntity> entities, bool includingDetails = false)
+    {
+        if (!includingDetails)
+            return await MapTo<List<TEntityDto>>(entities);
+
+        var entityDtos = await Task.WhenAll(entities.ConvertAll(async entity => await MapToEntityDto(entity)));
+        return entityDtos.ToList();
+    }
+
     protected virtual Task<TOutput> MapTo<TOutput>(object? input) where TOutput : class
     {
-        return MapTo<object,TOutput>(input);
+        return MapTo<object, TOutput>(input);
     }
 
     protected virtual Task<TOutput> MapTo<TInput, TOutput>(TInput? input) where TInput : class where TOutput : class
@@ -107,17 +116,6 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
         if (input == null)
             return Task.FromResult<TOutput>(default!);
 
-        return Task.FromResult(ObjectMapper.Map<TInput,TOutput>(input));
-    }
-
-    protected virtual async Task<List<TEntityDto>> MapToEntityDtoList(List<TEntity> entities)
-    {
-        var entityDtos = new List<TEntityDto>();
-        foreach (var entity in entities)
-        {
-            entityDtos.Add(await MapToEntityDto(entity));
-        }
-
-        return entityDtos;
+        return Task.FromResult(ObjectMapper.Map<TInput, TOutput>(input));
     }
 }
