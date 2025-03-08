@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FastX.Identity.Controllers;
 
 /// <summary>
-/// 身份管理
+/// Identity
 /// </summary>
 [Authorize]
 public class IdentityController : XController
@@ -30,7 +30,7 @@ public class IdentityController : XController
     }
 
     /// <summary>
-    /// 获取用户信息
+    /// GetUserInfo
     /// </summary>
     /// <returns></returns>
     [HttpGet]
@@ -50,6 +50,11 @@ public class IdentityController : XController
         };
     }
 
+    /// <summary>
+    /// Permissions
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="UserFriendlyException"></exception>
     [HttpGet]
     public async Task<List<string>> Permissions()
     {

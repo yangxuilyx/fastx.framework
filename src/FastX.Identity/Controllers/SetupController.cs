@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FastX.Identity.Controllers;
 
 /// <summary>
-/// SetupController
+/// Setup
 /// </summary>
 public class SetupController:XController
 {
@@ -24,7 +24,7 @@ public class SetupController:XController
     }
 
     /// <summary>
-    /// 安装系统
+    /// Setup
     /// </summary>
     /// <returns></returns>
     [HttpPost]

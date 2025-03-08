@@ -22,7 +22,7 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
     }
 
     /// <summary>
-    /// 获取实体
+    /// Get
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -36,6 +36,11 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
         return await MapToEntityDto(entity);
     }
 
+    /// <summary>
+    /// GetList
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
     public virtual async Task<PagedResultDto<TEntityDto>> ListAsync(TGetListInput input)
     {
         var queryFilter = CreateFilteredQuery(input);

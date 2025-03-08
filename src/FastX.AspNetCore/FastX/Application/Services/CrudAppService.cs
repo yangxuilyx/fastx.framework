@@ -38,6 +38,11 @@ public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, T
     /// <param name="repository"></param>
     protected CrudAppService(IRepository<TEntity> repository) : base(repository) { }
 
+    /// <summary>
+    /// Insert
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
     public virtual async Task<TEntityDto> InsertAsync(TCreateInput input)
     {
         var entity = await MapCreateDtoToEntity(input);
@@ -46,6 +51,11 @@ public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, T
         return await MapToEntityDto(entity);
     }
 
+    /// <summary>
+    /// Update
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
     public virtual async Task<TEntityDto> UpdateAsync(TUpdateInput input)
     {
         var entity = await MapUpdateDtoToEntity(input);
@@ -54,6 +64,11 @@ public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, T
         return await MapToEntityDto(entity);
     }
 
+    /// <summary>
+    /// InsertOrUpdate
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
     public virtual async Task<TEntityDto> InsertOrUpdateAsync(TCreateInput input)
     {
         var entity = await MapCreateDtoToEntity(input);
@@ -62,6 +77,11 @@ public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, T
         return await MapToEntityDto(entity);
     }
 
+    /// <summary>
+    /// Delete
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public virtual async Task<bool> DeleteAsync(TKey id)
     {
         return await Repository.DeleteAsync(id);

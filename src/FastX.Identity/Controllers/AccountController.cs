@@ -24,7 +24,7 @@ public class AccountController : XController
 
 
     /// <summary>
-    /// 登录
+    /// Login
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
