@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
@@ -74,21 +75,30 @@ public static class UseResultWrapperExtensions
                                 return;
                             }
 
+                            if (returnType.IsBasicType())
+                            {
+                                context.Response.Body.Seek(0, SeekOrigin.Begin);
+                                using var reader = new StreamReader(context.Response.Body);
+                                var value = await reader.ReadToEndAsync();
+
+                                var res = returnType.ConvertFromString(value);
+                                var bytes = JsonSerializer.SerializeToUtf8Bytes(ResponseResult<object>.SuccessResult(res), serializerOptions);
+                                await CopyToResponse(bytes, originalResponseBody);
+                                return;
+                            }
+
                             if (returnType == typeof(Task))
                             {
                                 var bytes = JsonSerializer.SerializeToUtf8Bytes(ResponseResult<object>.SuccessResult(null), serializerOptions);
-                                await new MemoryStream(bytes).CopyToAsync(originalResponseBody);
+                                await CopyToResponse(bytes, originalResponseBody);
                                 return;
                             }
                             else
                             {
-
                                 context.Response.Body.Seek(0, SeekOrigin.Begin);
-                                //反序列化得到原始结果
                                 var result = await JsonSerializer.DeserializeAsync(context.Response.Body, returnType, serializerOptions);
-                                //对原始结果进行包装
                                 var bytes = JsonSerializer.SerializeToUtf8Bytes(ResponseResult<object>.SuccessResult(result), serializerOptions);
-                                await new MemoryStream(bytes).CopyToAsync(originalResponseBody);
+                                await CopyToResponse(bytes, originalResponseBody);
                                 return;
                             }
                         }
@@ -99,9 +109,15 @@ public static class UseResultWrapperExtensions
             }
             finally
             {
-                //将原始的Body归还回来
                 context.Response.Body = originalResponseBody;
             }
         });
+
+    }
+
+    private static async Task CopyToResponse(byte[] bytes, Stream originalResponseBody)
+    {
+        using var memoryStream = new MemoryStream(bytes);
+        await memoryStream.CopyToAsync(originalResponseBody);
     }
 }
