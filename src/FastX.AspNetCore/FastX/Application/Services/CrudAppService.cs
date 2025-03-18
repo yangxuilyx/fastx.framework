@@ -5,7 +5,7 @@ namespace FastX.Application.Services;
 
 public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput> : CrudAppService<TEntity, TKey, TEntityDto, TGetListInput,
     TEntityDto, TEntityDto>
-    where TEntity : class, IEntity where TEntityDto : class
+    where TEntity : class, IEntity, new() where TEntityDto : class
 {
     /// <summary>
     /// 
@@ -18,7 +18,7 @@ public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput> :
 
 public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, TCreateInput> : CrudAppService<TEntity, TKey, TEntityDto, TGetListInput,
     TCreateInput, TCreateInput>
-    where TEntity : class, IEntity where TEntityDto : class where TCreateInput : class
+    where TEntity : class, IEntity, new() where TEntityDto : class where TCreateInput : class
 {
     /// <summary>
     /// 
@@ -30,7 +30,7 @@ public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, T
 }
 
 public abstract class CrudAppService<TEntity, TKey, TEntityDto, TGetListInput, TCreateInput, TUpdateInput> : ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInput>
-    where TEntity : class, IEntity where TEntityDto : class where TCreateInput : class where TUpdateInput : class
+    where TEntity : class, IEntity, new() where TEntityDto : class where TCreateInput : class where TUpdateInput : class
 {
     /// <summary>
     /// CrudAppService

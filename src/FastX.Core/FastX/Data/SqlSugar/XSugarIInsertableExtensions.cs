@@ -6,7 +6,7 @@ namespace FastX.Data.SqlSugar;
 
 public static class XSugarIInsertableExtensions
 {
-    public static IInsertable<TEntity> AutoSetUlid<TEntity>([NotNull] this IInsertable<TEntity> insertable) where TEntity : Entity, new()
+    public static IInsertable<TEntity> AutoSetUlid<TEntity>([NotNull] this IInsertable<TEntity> insertable) where TEntity : class, IEntity, new()
     {
         var primaryKeys = GetPrimaryKeys(insertable);
         foreach (var primaryKey in primaryKeys)
@@ -34,7 +34,7 @@ public static class XSugarIInsertableExtensions
         return insertable;
     }
 
-    private static List<string> GetPrimaryKeys<TEntity>(IInsertable<TEntity> insertable) where TEntity : Entity, new()
+    private static List<string> GetPrimaryKeys<TEntity>(IInsertable<TEntity> insertable) where TEntity : class, IEntity, new()
     {
         var insertBuilder = insertable.InsertBuilder;
         if (insertBuilder.Context.IsSystemTablesConfig)

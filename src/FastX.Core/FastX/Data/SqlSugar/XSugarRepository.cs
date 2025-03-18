@@ -2,16 +2,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using FastX.Data.Entities;
 using FastX.Data.PagedResult;
-using FastX.Data.SqlSugar;
+using FastX.Data.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SqlSugar;
 using SqlSugar.Extensions;
 
-namespace FastX.Data.Repository;
+namespace FastX.Data.SqlSugar;
 
 public class XSugarRepository<TEntity>(IXSugarContext context, IOptions<XSugarOptions> options) : IRepository<TEntity>
-    where TEntity : Entity, new()
+    where TEntity : class, IEntity, new()
 {
     public IXSugarContext Context { get; } = context;
 

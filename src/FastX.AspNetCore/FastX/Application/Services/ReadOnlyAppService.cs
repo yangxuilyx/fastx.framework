@@ -3,13 +3,14 @@ using FastX.Application.Dtos;
 using FastX.Data.Entities;
 using FastX.Data.PagedResult;
 using FastX.Data.Repository;
+using FastX.Data.SqlSugar;
 using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
 
 namespace FastX.Application.Services;
 
 public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInput> : ApplicationService
-    where TEntity : class, IEntity where TEntityDto : class
+    where TEntity : class, IEntity, new() where TEntityDto : class
 {
     protected IRepository<TEntity> Repository { get; }
 
@@ -89,7 +90,7 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
     protected virtual ISugarQueryable<TEntity> CreateFilteredQuery(
         TGetListInput input)
     {
-        return Repository.GetQueryable();
+        return Repository.GetQueryable<TEntity>();
     }
 
     protected virtual Task<TEntityDto> MapToEntityDto(TEntity entity)

@@ -1,5 +1,6 @@
 using FastX.Data.DataFilters;
 using FastX.Data.Repository;
+using FastX.Data.SqlSugar;
 using FastX.DistributedCache;
 using FastX.Modularity;
 using FastX.MultiTenancy;

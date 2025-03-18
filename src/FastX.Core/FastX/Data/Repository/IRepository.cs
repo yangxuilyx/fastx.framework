@@ -29,12 +29,6 @@ public interface IRepository<TEntity>
     Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> where);
 
     /// <summary>
-    /// get queryable
-    /// </summary>
-    /// <returns></returns>
-    ISugarQueryable<TEntity> GetQueryable();
-
-    /// <summary>
     /// get entity list by the given predicate
     /// </summary>
     /// <param name="where"></param>
