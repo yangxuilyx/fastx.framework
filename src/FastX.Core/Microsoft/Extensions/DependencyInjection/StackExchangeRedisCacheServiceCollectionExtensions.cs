@@ -5,7 +5,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class StackExchangeRedisCacheServiceCollectionExtensions
 {
-    public static IServiceCollection AddFastXStackExchangeRedisCache(
+    public static IServiceCollection AddXStackExchangeRedisCache(
         this IServiceCollection services,
         string configuration
         )

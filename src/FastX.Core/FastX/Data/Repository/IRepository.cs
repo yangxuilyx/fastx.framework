@@ -24,26 +24,17 @@ public interface IRepository<TEntity>
     Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> where);
 
     /// <summary>
-    /// get entity list by the given predicate
-    /// </summary>
-    /// <param name="where"></param>
-    /// <returns></returns>
-    Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> where);
-
-    /// <summary>
     /// get entity list 
     /// </summary>
     /// <returns></returns>
     Task<List<TEntity>> GetListAsync();
 
     /// <summary>
-    /// get entity paged list by the given predicate,set TotalCount,TotalPage to pageInfo
+    /// get entity list by the given predicate
     /// </summary>
     /// <param name="where"></param>
-    /// <param name="pageInfo"></param>
-    /// <param name="orderExpression"></param>
     /// <returns></returns>
-    Task<List<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> where, PageInfo pageInfo, Expression<Func<TEntity, object>> orderExpression);
+    Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> where);
 
     /// <summary>
     /// insert a new entity
@@ -76,13 +67,6 @@ public interface IRepository<TEntity>
     Task<TEntity> UpdateAsync(TEntity entity, Expression<Func<TEntity, object>> ignoreColumns);
 
     /// <summary>
-    /// insert or update entity
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <returns></returns>
-    Task<TEntity> InsertOrUpdateAsync(TEntity entity);
-
-    /// <summary>
     /// update  entity
     /// </summary>
     /// <param name="entity"></param>
@@ -97,6 +81,13 @@ public interface IRepository<TEntity>
     /// <param name="entities"></param>
     /// <returns></returns>
     Task<bool> UpdateAsync(List<TEntity> entities);
+
+    /// <summary>
+    /// insert or update entity
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+    Task<TEntity> InsertOrUpdateAsync(TEntity entity);
 
     /// <summary>
     /// delete entity

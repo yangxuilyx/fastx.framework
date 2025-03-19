@@ -56,7 +56,7 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
                 pageInfo = new PageInfo()
                 {
                     PageSize = 10,
-                    PageIndex = 0,
+                    PageIndex = 1,
                 };
 
             RefAsync<int> totalCount = 0;

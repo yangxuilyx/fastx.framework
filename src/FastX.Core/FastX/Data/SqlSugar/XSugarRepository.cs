@@ -35,13 +35,10 @@ public class XSugarRepository<TEntity>(IXSugarContext context, IOptions<XSugarOp
                    .FirstAsync();
     }
 
-    public ISugarQueryable<TEntity> GetQueryable()
+    public async Task<List<TEntity>> GetListAsync()
     {
-        using var context = Context.GetContext<TEntity>();
-        return context
-                .Queryable<TEntity>()
-                .WithCacheIF(Options.EnableDataCache)
-            ;
+        return await GetQueryable()
+            .ToListAsync();
     }
 
     public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> where)
@@ -49,32 +46,6 @@ public class XSugarRepository<TEntity>(IXSugarContext context, IOptions<XSugarOp
         return await GetQueryable()
                     .Where(where)
             .ToListAsync();
-    }
-
-    /// <summary>
-    /// get entity list 
-    /// </summary>
-    /// <returns></returns>
-    public async Task<List<TEntity>> GetListAsync()
-    {
-        return await GetQueryable()
-            .ToListAsync();
-    }
-
-    public async Task<List<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> where, PageInfo pageInfo, Expression<Func<TEntity, object>> orderExpression)
-    {
-        RefAsync<int> totalCount = 0;
-        RefAsync<int> totalPage = 0;
-
-        var result = await GetQueryable()
-            .Where(where)
-            .OrderBy(orderExpression)
-            .ToOffsetPageAsync(pageInfo.PageIndex, pageInfo.PageSize, totalCount, totalPage);
-
-        pageInfo.TotalCount = totalCount;
-        pageInfo.TotalPage = totalPage;
-
-        return result;
     }
 
     public async Task<TEntity> InsertAsync(TEntity entity)
@@ -111,32 +82,11 @@ public class XSugarRepository<TEntity>(IXSugarContext context, IOptions<XSugarOp
             await context.Fastest<TEntity>().PageSize(pageSize).BulkCopyAsync(entities);
     }
 
-    private static void TryToSetCreateTime(TEntity entity)
-    {
-        if (entity is IHasCreateTime createEntity)
-        {
-            if (createEntity.CreateTime == DateTime.MinValue)
-            {
-                createEntity.CreateTime = DateTime.Now;
-            }
-        }
-
-        SetUpdateTime(entity);
-    }
-
-    private static void SetUpdateTime(TEntity entity)
-    {
-        if (entity is IHasUpdateTime updateEntity)
-        {
-            updateEntity.UpdateTime = DateTime.Now;
-        }
-    }
-
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         using var context = Context.GetContext<TEntity>();
 
-        SetUpdateTime(entity);
+        TryToSetUpdateTime(entity);
 
         await context.Updateable(entity)
             .ExecuteCommandAsync();
@@ -148,13 +98,44 @@ public class XSugarRepository<TEntity>(IXSugarContext context, IOptions<XSugarOp
     {
         using var context = Context.GetContext<TEntity>();
 
-        SetUpdateTime(entity);
+        TryToSetUpdateTime(entity);
 
         await context.Updateable(entity)
            .IgnoreColumns(ignoreColumns)
            .ExecuteCommandAsync();
 
         return entity;
+    }
+
+    public async Task<TEntity> UpdateAsync(TEntity entity, Expression<Func<TEntity, object>>? ignoreColumns, Expression<Func<TEntity, object>>? updateColumns)
+    {
+        using var context = Context.GetContext<TEntity>();
+
+        TryToSetUpdateTime(entity);
+
+        await context.Updateable(entity)
+            .IgnoreColumns(ignoreAllNullColumns: true, ignoreAllDefaultValue: true)
+            .IgnoreColumnsIF(ignoreColumns != null, ignoreColumns)
+            .UpdateColumnsIF(updateColumns != null, updateColumns)
+            .ExecuteCommandAsync();
+
+        return entity;
+    }
+
+    public async Task<bool> UpdateAsync(List<TEntity> entities)
+    {
+        foreach (var entity in entities)
+        {
+            TryToSetUpdateTime(entity);
+        }
+
+        using var context = Context.GetContext<TEntity>();
+
+        var result = await context.Updateable(entities)
+            .IgnoreColumns(ignoreAllNullColumns: true, ignoreAllDefaultValue: true)
+            .ExecuteCommandAsync();
+
+        return result > 0;
     }
 
     /// <summary>
@@ -179,36 +160,6 @@ public class XSugarRepository<TEntity>(IXSugarContext context, IOptions<XSugarOp
             .ExecuteReturnEntityAsync();
     }
 
-    public async Task<TEntity> UpdateAsync(TEntity entity, Expression<Func<TEntity, object>>? ignoreColumns, Expression<Func<TEntity, object>>? updateColumns)
-    {
-        using var context = Context.GetContext<TEntity>();
-
-        SetUpdateTime(entity);
-
-        await context.Updateable(entity)
-            .IgnoreColumns(ignoreAllNullColumns: true, ignoreAllDefaultValue: true)
-            .IgnoreColumnsIF(ignoreColumns != null, ignoreColumns)
-            .UpdateColumnsIF(updateColumns != null, updateColumns)
-            .ExecuteCommandAsync();
-
-        return entity;
-    }
-
-    public async Task<bool> UpdateAsync(List<TEntity> entities)
-    {
-        foreach (var entity in entities)
-        {
-            SetUpdateTime(entity);
-        }
-
-        using var context = Context.GetContext<TEntity>();
-
-        var result = await context.Updateable(entities)
-             .IgnoreColumns(ignoreAllNullColumns: true, ignoreAllDefaultValue: true)
-             .ExecuteCommandAsync();
-
-        return result > 0;
-    }
 
     public async Task<bool> DeleteAsync(TEntity entity)
     {
@@ -233,5 +184,35 @@ public class XSugarRepository<TEntity>(IXSugarContext context, IOptions<XSugarOp
             return true;
 
         return await DeleteAsync(entity);
+    }
+
+    internal ISugarQueryable<TEntity> GetQueryable()
+    {
+        using var context = Context.GetContext<TEntity>();
+        return context
+                .Queryable<TEntity>()
+                .WithCacheIF(Options.EnableDataCache)
+            ;
+    }
+
+    private static void TryToSetCreateTime(TEntity entity)
+    {
+        if (entity is IHasCreateTime createEntity)
+        {
+            if (createEntity.CreateTime == DateTime.MinValue)
+            {
+                createEntity.CreateTime = DateTime.Now;
+            }
+        }
+
+        TryToSetUpdateTime(entity);
+    }
+
+    private static void TryToSetUpdateTime(TEntity entity)
+    {
+        if (entity is IHasUpdateTime updateEntity)
+        {
+            updateEntity.UpdateTime = DateTime.Now;
+        }
     }
 }

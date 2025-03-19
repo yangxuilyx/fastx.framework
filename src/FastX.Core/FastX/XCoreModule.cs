@@ -18,6 +18,5 @@ public class XCoreModule : XModule
         services.AddSingleton<IConnectionMultiplexerFactory, ConnectionMultiplexerFactory>();
 
         services.AddSingleton<ICurrentTenantAccessor>(AsyncLocalCurrentTenantAccessor.Instance);
-
     }
 }
