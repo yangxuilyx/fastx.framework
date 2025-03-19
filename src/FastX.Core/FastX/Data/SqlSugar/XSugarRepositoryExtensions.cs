@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using FastX.Data.Entities;
 using FastX.Data.Repository;
 using SqlSugar;
@@ -7,7 +8,7 @@ namespace FastX.Data.SqlSugar;
 public static class XSugarRepositoryExtensions
 {
     public static Task<List<TResult>> SqlQuery<TResult, TEntity>(
-        this IRepository repository,
+        this IRepository<TEntity> repository,
         string sql) where TResult : class, new() where TEntity : class, IEntity, new()
     {
         if (repository is XSugarRepository<TEntity> xSugarRepository)
@@ -20,7 +21,7 @@ public static class XSugarRepositoryExtensions
     }
 
     public static Task<int> ExecuteCommandAsync<TEntity>(
-        this IRepository repository,
+        this IRepository<TEntity> repository,
         string sql,
         params SugarParameter[] parameters
     ) where TEntity : class, IEntity, new()
@@ -37,7 +38,7 @@ public static class XSugarRepositoryExtensions
     /// get queryable
     /// </summary>
     /// <returns></returns>
-    public static ISugarQueryable<TEntity> GetQueryable<TEntity>(this IRepository repository) where TEntity : class, IEntity, new()
+    public static ISugarQueryable<TEntity> GetQueryable<TEntity>(this IRepository<TEntity> repository) where TEntity : class, IEntity, new()
     {
         if (repository is XSugarRepository<TEntity> xSugarRepository)
             return xSugarRepository.GetQueryable();

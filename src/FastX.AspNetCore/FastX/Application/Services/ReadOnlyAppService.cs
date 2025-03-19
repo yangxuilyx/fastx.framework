@@ -90,7 +90,7 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
     protected virtual ISugarQueryable<TEntity> CreateFilteredQuery(
         TGetListInput input)
     {
-        return Repository.GetQueryable<TEntity>();
+        return Repository.GetQueryable();
     }
 
     protected virtual Task<TEntityDto> MapToEntityDto(TEntity entity)
