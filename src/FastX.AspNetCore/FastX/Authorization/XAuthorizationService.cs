@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using FastX.Authorization.Abstractions;
-using FastX.Users;
+using FastX.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

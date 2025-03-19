@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using FastX.Authorization.Permissions.Abstractions;
 using FastX.Security.Claims;
-using FastX.Users;
 
 namespace FastX.Authorization.Permissions
 {

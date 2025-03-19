@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace FastX.Users;
+namespace FastX.Security.Claims;
 
 public interface ICurrentPrincipalAccessor
 {

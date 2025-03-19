@@ -1,5 +1,4 @@
 using FastX.DependencyInjection;
-using FastX.Users;
 using System.Security.Claims;
 
 namespace FastX.Security.Claims;
