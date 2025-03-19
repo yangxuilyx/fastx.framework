@@ -1,5 +1,4 @@
 using FastX.Application.Dtos;
-using FastX.Data.PagedResult;
 
 namespace FastX.Identity.Application.Identity.Ous.Dtos;
 

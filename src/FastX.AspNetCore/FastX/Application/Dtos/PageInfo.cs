@@ -1,4 +1,4 @@
-namespace FastX.Data.PagedResult;
+namespace FastX.Application.Dtos;
 
 public class PageInfo
 {

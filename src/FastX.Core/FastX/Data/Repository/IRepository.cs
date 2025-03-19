@@ -1,13 +1,10 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
 using FastX.Data.Entities;
-using FastX.Data.PagedResult;
-using SqlSugar;
+using System.Linq.Expressions;
 
 namespace FastX.Data.Repository;
 
 public interface IRepository<TEntity>
-    where TEntity : IEntity
+    where TEntity : class, IEntity, new()
 {
     /// <summary>
     /// get entity by keys

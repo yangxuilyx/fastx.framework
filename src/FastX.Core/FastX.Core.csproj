@@ -16,4 +16,8 @@
     <ProjectReference Include="..\FastX\FastX.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FastX\Data\PagedResult\" />
+  </ItemGroup>
+
 </Project>

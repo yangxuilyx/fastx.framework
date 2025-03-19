@@ -1,5 +1,4 @@
 using FastX.Application.Dtos;
-using FastX.Data.PagedResult;
 
 namespace FastX.CodeGenerate.Application.Generate.Dtos;
 

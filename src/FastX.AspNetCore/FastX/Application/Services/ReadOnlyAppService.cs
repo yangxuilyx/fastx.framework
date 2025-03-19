@@ -1,7 +1,6 @@
 using AutoMapper;
 using FastX.Application.Dtos;
 using FastX.Data.Entities;
-using FastX.Data.PagedResult;
 using FastX.Data.Repository;
 using FastX.Data.SqlSugar;
 using Microsoft.Extensions.DependencyInjection;
