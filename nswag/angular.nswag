@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "http://10.0.0.113:5014/swagger/v1/swagger.json",
+      "url": "http://localhost:5014/swagger/v1/swagger.json",
       "output": null,
       "newLineBehavior": "Auto"
     }
@@ -18,7 +18,7 @@
       "promiseType": "Promise",
       "httpClass": "HttpClient",
       "withCredentials": false,
-      "useSingletonProvider": true,
+      "useSingletonProvider": false,
       "injectionTokenType": "InjectionToken",
       "rxJsVersion": 7.0,
       "dateTimeType": "Date",
@@ -29,6 +29,8 @@
       "exportTypes": true,
       "wrapDtoExceptions": false,
       "exceptionClass": "ApiException",
+      "generateExceptions": false,     
+      "generateExceptionClasses":false,
       "clientBaseClass": "ClientBase",
       "wrapResponses": false,
       "wrapResponseMethods": [],
@@ -36,7 +38,7 @@
       "responseClass": "SwaggerResponse",
       "protectedMethods": [],
       "configurationClass": null,
-      "useTransformOptionsMethod": false,
+      "useTransformOptionsMethod": true,
       "useTransformResultMethod": true,
       "generateDtoTypes": true,
       "operationGenerationMode": "MultipleClientsFromPathSegments",
@@ -56,7 +58,7 @@
       "generateConstructorInterface": true,
       "convertConstructorInterfaceData": false,
       "importRequiredTypes": false,
-      "useGetBaseUrlMethod": true,
+      "useGetBaseUrlMethod": false,
       "baseUrlTokenName": "API_BASE_URL",
       "queryNullValue": "",
       "useAbortSignal": false,
