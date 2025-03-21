@@ -1,4 +1,4 @@
-﻿using SqlSugar;
+using SqlSugar;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -9,4 +9,6 @@ public class XSugarRegistrationOptions
     public string? ConnectionString { get; set; } = string.Empty;
 
     public bool IsAutoCloseConnection { get; set; } = true;
+
+    public Action<ConnMoreSettings>? ConnMoreSettingsSetupAction { get; set; }
 }

@@ -24,11 +24,15 @@ public static class SugarServiceRegistrationCollectionExtensions
         else services.Configure<SequentialGuidGeneratorOptions>(t =>
             t.DefaultSequentialGuidType = SequentialGuidType.SequentialAtEnd);
 
+        var connMoreSettings = new ConnMoreSettings();
+        options.ConnMoreSettingsSetupAction?.Invoke(connMoreSettings);
+
         var sqlSugarClient = new SqlSugarClient(new ConnectionConfig()
         {
             DbType = options.DbType,
             ConnectionString = options.ConnectionString,
             IsAutoCloseConnection = options.IsAutoCloseConnection,
+            MoreSettings = connMoreSettings,
             ConfigureExternalServices = new ConfigureExternalServices()
             {
                 EntityService = (propertyInfo, columnInfo) =>
@@ -75,6 +79,7 @@ public static class SugarServiceRegistrationCollectionExtensions
 
             //};
         });
+
 
         services.AddTransient<ISqlSugarClient>(t => sqlSugarClient);
 
