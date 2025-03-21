@@ -78,6 +78,8 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
         }
     }
 
+
+
     protected virtual ISugarQueryable<TEntity> ApplySorting(ISugarQueryable<TEntity> query, TGetListInput input)
     {
         if (input is ISortedResultRequest sortedInput)
@@ -97,7 +99,12 @@ public abstract class ReadOnlyAppService<TEntity, TKey, TEntityDto, TGetListInpu
         return MapTo<TEntity, TEntityDto>(entity);
     }
 
-    protected virtual async Task<List<TEntityDto>> MapToEntityDtoList(List<TEntity> entities, bool includingDetails = false)
+    protected virtual Task<List<TEntityDto>> MapToEntityDtoList(List<TEntity> entities)
+    {
+        return MapToEntityDtoList(entities, false);
+    }
+
+    protected virtual async Task<List<TEntityDto>> MapToEntityDtoList(List<TEntity> entities, bool includingDetails)
     {
         if (!includingDetails)
             return await MapTo<List<TEntityDto>>(entities);
