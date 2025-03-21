@@ -291,7 +291,7 @@ namespace System // wa-o, System Namespace!?
             return ulid;
         }
 
-        public static bool TryParse(string base32, out Ulid ulid)
+        public static bool TryParse(string? base32, out Ulid ulid)
         {
             return TryParse(base32.AsSpan(), out ulid);
         }
@@ -300,7 +300,7 @@ namespace System // wa-o, System Namespace!?
         {
             if (base32.Length != 26)
             {
-                ulid = default(Ulid);
+                ulid = default;
                 return false;
             }
 
@@ -590,7 +590,7 @@ namespace System // wa-o, System Namespace!?
 
         public static bool operator !=(Ulid a, Ulid b) => !EqualsCore(a, b);
 
-        public static bool operator ==(Ulid a, string b)
+        public static bool operator ==(Ulid a, string? b)
         {
             if (!TryParse(b, out var ulid))
                 return false;
@@ -598,11 +598,11 @@ namespace System // wa-o, System Namespace!?
             return a == ulid;
         }
 
-        public static bool operator !=(Ulid a, string b) => !(a == b);
+        public static bool operator !=(Ulid a, string? b) => !(a == b);
 
         public static implicit operator string(Ulid a) => a.ToString();
 
-        public static implicit operator Ulid(string s) => TryParse(s, out var ulid) ? ulid : Empty;
+        public static implicit operator Ulid(string? s) => TryParse(s, out var ulid) ? ulid : Empty;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int GetResult(byte me, byte them) => me < them ? -1 : 1;
