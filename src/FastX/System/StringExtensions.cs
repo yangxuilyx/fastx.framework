@@ -546,6 +546,40 @@ public static class StringExtensions
         return encoding.GetBytes(str);
     }
 
+    /// <summary>
+    /// Convert to Int32
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static int ToInt32(this string? str)
+    {
+        if (int.TryParse(str, out var val))
+            return val;
+
+        return 0;
+    }
+
+    /// <summary>
+    /// Convert to Datetime
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static DateTime ToDateTime(this string? str) => ToDateTime(str, DateTime.MinValue);
+
+    /// <summary>
+    /// Convert to Datetime
+    /// </summary>
+    /// <param name="str"></param>
+    /// <param name="defaultValue"></param>
+    /// <returns></returns>
+    public static DateTime ToDateTime(string? str, DateTime defaultValue)
+    {
+        if (DateTime.TryParse(str, out var result))
+            return result;
+
+        return defaultValue;
+    }
+
     private static bool IsAllUpperCase(string input)
     {
         for (int i = 0; i < input.Length; i++)
