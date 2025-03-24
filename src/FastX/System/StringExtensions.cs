@@ -572,7 +572,7 @@ public static class StringExtensions
     /// <param name="str"></param>
     /// <param name="defaultValue"></param>
     /// <returns></returns>
-    public static DateTime ToDateTime(string? str, DateTime defaultValue)
+    public static DateTime ToDateTime(this string? str, DateTime defaultValue)
     {
         if (DateTime.TryParse(str, out var result))
             return result;
