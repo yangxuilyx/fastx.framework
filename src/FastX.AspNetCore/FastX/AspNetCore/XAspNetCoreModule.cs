@@ -23,6 +23,8 @@ public class XAspNetCoreModule : XModule
         services.AddControllers(options =>
             {
                 options.Filters.Add<AutoValidateModelStateFilter>();
+
+                options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
             })
         .AddControllersAsServices()
         .AddJsonOptions(t =>
